@@ -1,5 +1,7 @@
 import { createSlice , PayloadAction} from "@reduxjs/toolkit";
 import { Pizza } from "../data/menu-items";
+import { RootState } from "./store";
+import { formatPrice } from "../utils/price-utils";
 
 
 export type CartItem = Pizza & {
@@ -32,12 +34,58 @@ export const cartSlice = createSlice({
             else{
                 matchingPizza.quantity++;
             }
+        },
 
+        removeItem: (state, action: PayloadAction<Pizza>) => {
+            const matchingPizza = state.items.find(existingItem => {
+                return existingItem.id === action.payload.id;
+            });
+
+            matchingPizza!.quantity--;
+
+            if(matchingPizza!.quantity === 0) {
+                state.items = state.items.filter(item => {
+                    return item.id!== matchingPizza!.id;
+                });
+            }
+
+        },
+
+        deleteItem: (state, action: PayloadAction<Pizza>) => {
+            state.items = state.items.filter(item => {
+                return item.id!== action.payload.id;
+            })
         }
     }
 });
 
-export const {addItem}= cartSlice.actions;
+export const {addItem, removeItem , deleteItem}= cartSlice.actions;
 
 const cartReducer = cartSlice.reducer;
+
+export const selectItemQuantity = (item: Pizza) => {
+    return (state: RootState) => {
+        const matchingCartItem = state.cart.items.find(existingItem => {
+            return existingItem.id === item.id;
+        });
+
+        return matchingCartItem?.quantity || 0;
+    }
+}
+
+export const selectPizzasCount = (state: RootState) => {
+    return state.cart.items.reduce((acc, nextItem) => {
+        return acc + nextItem.quantity;
+    },0)
+}
+
+export const selectCartTotal = (state: RootState) => {
+    const total = state.cart.items.reduce((acc, nextItem) => {
+        return acc + nextItem.quantity * nextItem.price;
+    }, 0);
+
+    return formatPrice(total);
+}
+
+
 export default cartReducer;

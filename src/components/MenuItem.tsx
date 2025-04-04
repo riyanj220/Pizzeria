@@ -1,14 +1,14 @@
 import { FC } from "react";
 import { Pizza } from "../data/menu-items";
-import { useAppDispatch } from "../store/hooks";
-import { addItem } from "../store/cartSlice";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { addItem, deleteItem, removeItem, selectItemQuantity } from "../store/cartSlice";
 
 type MenuItemProps = {
   item: Pizza;
   readonly?: boolean;
 };
 const MenuItem: FC<MenuItemProps> = ({ item, readonly }) => {
-  const quantity = 0;
+  const quantity = useAppSelector(selectItemQuantity(item));
   const dispatch = useAppDispatch(); 
 
   return (
@@ -19,14 +19,19 @@ const MenuItem: FC<MenuItemProps> = ({ item, readonly }) => {
       <div className="card-body">
         <h2 className="card-title">{item.title}</h2>
         <div>{item.ingredients.join(", ")}</div>
+
+
         <div className={`card-actions justify-between items-end`}>
           <b className="font-semibold">€{item.price}</b>
-          <button className="btn btn-primary" onClick={() => {
+          {
+            quantity === 0 ? <button className="btn btn-primary" onClick={() => {
               dispatch(addItem(item));
-          }}>Add to Cart</button>
+          }}>Add to Cart</button>:
           <div className="flex gap-4 items-center">
             {!readonly && (
-              <button className="btn btn-sm md:btn-md btn-primary btn-circle">
+              <button className="btn btn-sm md:btn-md btn-primary btn-circle" onClick={() => {
+                dispatch(removeItem(item));
+              }}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -60,7 +65,9 @@ const MenuItem: FC<MenuItemProps> = ({ item, readonly }) => {
                     />
                   </svg>
                 </button>
-                <button className="btn btn-sm md:btn-md btn-primary ml-4">
+                <button className="btn btn-sm md:btn-md btn-primary ml-4" onClick={() => {
+                  dispatch(deleteItem(item));
+                }}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -81,6 +88,7 @@ const MenuItem: FC<MenuItemProps> = ({ item, readonly }) => {
               </>
             )}
           </div>
+          }
         </div>
       </div>
     </div>
