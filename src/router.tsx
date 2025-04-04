@@ -8,7 +8,7 @@ import Order from "./pages/Order";
 export const router = createBrowserRouter(
     createRoutesFromElements(
         <>
-            <Route path="/" element= {<Home/>} />
+            <Route path="/Pizzeria/" element= {<Home/>} />
             <Route path="/menu" element= {<Menu/>} />
             <Route path="/cart" element= {<Cart/>} />
             <Route path="/checkout" element= {<Checkout/>} />
