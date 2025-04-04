@@ -10,7 +10,7 @@ const Header = () => {
 
   return (
     <div className="navbar bg-primary text-base-100 sticky top-0 z-40 gap-4">
-      <Link to={"/Pizzeria"} className="btn btn-ghost text-xl">
+      <Link to={"/Pizzeria/"} className="btn btn-ghost text-xl">
         Pizzeria
       </Link>
       <form className="flex-1 flex justify-end">
