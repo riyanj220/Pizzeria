@@ -11,7 +11,7 @@ const Hero = () => {
         <div className="text-center lg:text-left">
           <h1 className="text-5xl font-bold">Feeling hungry?</h1>
           <p className="py-6 text-2xl">Order your favorite Pizza in minutes!</p>
-          <Link to={"/menu"} className="btn btn-primary">
+          <Link to={"/Pizzeria/menu"} className="btn btn-primary">
             Get Started
           </Link>
         </div>

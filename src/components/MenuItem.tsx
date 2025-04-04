@@ -10,7 +10,7 @@ const MenuItem: FC<MenuItemProps> = ({ item, readonly }) => {
   return (
     <div className="card px-4 card-side bg-base-300 shadow-xl">
       <figure className="w-32 min-w-32 mask mask-squircle">
-        <img src={`/images/pizzas/${item.image}`} alt="Movie" />
+        <img src={`./images/pizzas/${item.image}`} alt="Movie" />
       </figure>
       <div className="card-body">
         <h2 className="card-title">{item.title}</h2>
