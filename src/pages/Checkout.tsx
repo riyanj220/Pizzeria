@@ -5,7 +5,7 @@ import CreditCard from "../components/CreditCard";
 const Checkout = () => {
   return (
     <div className="my-6">
-      <BackBtn to={"/cart"}>Back to cart</BackBtn>
+      <BackBtn to={"/Pizzeria/cart"}>Back to cart</BackBtn>
       <div className="grid grid-cols-1 my-4 p-4 md:grid-cols-2 gap-8 card bg-base-300 shadow-xl">
         <section>
           <h2 className="text-2xl w-full text-center mb-4 card-title block">
