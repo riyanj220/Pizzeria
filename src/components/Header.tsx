@@ -5,7 +5,7 @@ const Header = () => {
   const [isFocused, setIsFocused] = useState(false);
   return (
     <div className="navbar bg-primary text-base-100 sticky top-0 z-40 gap-4">
-      <Link to={"/"} className="btn btn-ghost text-xl">
+      <Link to={"/Pizzeria"} className="btn btn-ghost text-xl">
         Pizzeria
       </Link>
       <form className="flex-1 flex justify-end">
@@ -25,7 +25,7 @@ const Header = () => {
           <span>€{0}</span>{" "}
         </div>
         <Link
-          to="/cart"
+          to="/Pizzeria/cart"
           tabIndex={0}
           role="button"
           className="btn btn-ghost btn-circle"
