@@ -140,6 +140,9 @@ const CreditCard:FC<CreditCardProps> = ({ submitHandler }) => {
           PAY
         </button>
       </div>{" "}
+      <small className="text-center italic text-xs">
+        Press Ctrl + Shift + H to fill the from with fake values
+      </small>
     </form>
   );
 };
