@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import cartReducer from "./cartSlice";
 import { persistStore } from "redux-persist";
+import orderReducer from "./orderSlice";
 
 
 export const store = configureStore({
     reducer: {
-        cart: cartReducer
+        cart: cartReducer,
+        orders: orderReducer
     },
 
     middleware: (getDefaultMiddleware) => {

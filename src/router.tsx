@@ -3,8 +3,9 @@ import Home from "./pages/Home";
 import Menu from "./pages/Menu";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
-import Order from "./pages/Order";
+import Order, { orderLoader } from "./pages/Order";
 import { RootLayout } from "./components/RootLayout";
+import OrderNotFound from "./pages/OrderNotFound";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -13,7 +14,7 @@ export const router = createBrowserRouter(
             <Route path="menu" element= {<Menu/>} />
             <Route path="cart" element= {<Cart/>} />
             <Route path="checkout" element= {<Checkout/>} />
-            <Route path="order/:orderId" element= {<Order/>} />
+            <Route loader={orderLoader} errorElement={<OrderNotFound/>} path="order/:orderId" element= {<Order/>} />
         </Route>
     ),
 )

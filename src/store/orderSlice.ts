@@ -26,7 +26,7 @@ export const ordersSlice = createSlice({
     reducers: {
         createOrder: (state, action: PayloadAction<Order>) => {
             
-            const maskedCCRegex = /\d(?=(?:\D+\d)[4])/g;
+            const maskedCCRegex = /\d(?=(?:\D*\d){4})/g;
             const maskedCCNumber = action.payload.creditCardNum.replace(
                 maskedCCRegex, 
                 "*"
@@ -36,7 +36,6 @@ export const ordersSlice = createSlice({
                 creditCardNum: maskedCCNumber,
             }
             state.items.push(newOrder);
-            console.log('create order slice called', newOrder);
         },
 
         removeOrder: (state, action: PayloadAction<{id: string}>) => {
