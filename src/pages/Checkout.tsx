@@ -43,7 +43,7 @@ const Checkout = () => {
                     return <tr key={item.id} >
                       <td>{item.title}</td>
                       <td>{item.quantity}</td>
-                      <td>€ {formatPrice(item.price * item.price)}</td>
+                      <td>€ {formatPrice(item.price * item.quantity)}</td>
                     </tr>
                   })
                 }

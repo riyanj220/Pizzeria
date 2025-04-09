@@ -12,7 +12,7 @@ const MenuItem: FC<MenuItemProps> = ({ item, readonly }) => {
   const dispatch = useAppDispatch(); 
 
   const location = useLocation();
-  const imagePath = location.pathname.includes('/order/') ? `/images/pizzas/${item.image}`
+  const imagePath = location.pathname.includes('/order/') ? `../images/pizzas/${item.image}`
   : `./images/pizzas/${item.image}`;
 
   return (
