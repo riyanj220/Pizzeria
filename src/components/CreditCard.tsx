@@ -1,10 +1,6 @@
 import "react-credit-cards-2/dist/es/styles-compiled.css";
 import { ChangeEventHandler, FC, FocusEventHandler, useRef, useState } from "react";
-import {
-  formatCVC,
-  formatCreditCardNumber,
-  formatExpirationDate,
-} from "../utils/card-utils";
+import { formatCVC, formatCreditCardNumber, formatExpirationDate } from "../utils/card-utils";
 import Cards, { Focused } from "react-credit-cards-2";
 import { useKeyPress } from "../hooks/useKeyPress";
 
@@ -20,7 +16,7 @@ type CreditCardProps = {
   submitHandler: (state: Omit<CardState, 'focus'>) => void;
 }
 
-const CreditCard:FC<CreditCardProps> = ({ submitHandler }) => {
+const CreditCard: FC<CreditCardProps> = ({ submitHandler }) => {
   const formRef = useRef<HTMLFormElement>(null);
   const [state, setState] = useState<CardState>({
     number: "",
@@ -52,32 +48,36 @@ const CreditCard:FC<CreditCardProps> = ({ submitHandler }) => {
     setState((prev) => ({ ...prev, focus: targetName }));
   };
 
-  const setInputValue = (inputName:string , value:string) => {
-      const target = formRef.current?.elements.namedItem(inputName) as HTMLInputElement;
+  const setInputValue = (inputName: string, value: string) => {
+    const target = formRef.current?.elements.namedItem(inputName) as HTMLInputElement;
 
-      const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
-        window.HTMLInputElement.prototype,
-        "value"
-      )!.set;
+    const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+      window.HTMLInputElement.prototype,
+      "value"
+    )!.set;
 
-      nativeInputValueSetter!.call(target, value);
+    nativeInputValueSetter!.call(target, value);
 
-      const inputEvent = new Event('input', {bubbles:true});
-      target.dispatchEvent(inputEvent);
+    const inputEvent = new Event('input', { bubbles: true });
+    target.dispatchEvent(inputEvent);
   }
 
-  useKeyPress('H' , () => {
-    setInputValue('number' , '2222 2222 2222 2222')
-    setInputValue('cvc' , '123')
-    setInputValue('expiry' , '12/25')
-    setInputValue('name' , 'Test user')
+  useKeyPress('H', () => {
+    setInputValue('number', '2222 2222 2222 2222')
+    setInputValue('cvc', '123')
+    setInputValue('expiry', '12/25')
+    setInputValue('name', 'Test user')
   })
+
+  // Form submission logic
+  const handleSubmit = (ev: React.FormEvent) => {
+    ev.preventDefault();
+    const { focus, ...restOfTheState } = state;
+    submitHandler(restOfTheState); // Pass the form state to the parent handler
+  };
+
   return (
-    <form ref={formRef} className="flex flex-col gap-4 items-center" onClick={(ev) => {
-      ev.preventDefault();
-      const {focus, ... restOfTheState} = state;
-      submitHandler(restOfTheState);
-    }}>
+    <form ref={formRef} className="flex flex-col gap-4 items-center" onSubmit={handleSubmit}>
       <Cards
         number={state.number}
         expiry={state.expiry}
@@ -141,7 +141,7 @@ const CreditCard:FC<CreditCardProps> = ({ submitHandler }) => {
         </button>
       </div>{" "}
       <small className="text-center italic text-xs">
-        Press Ctrl + Shift + H to fill the from with fake values
+        Press Ctrl + Shift + H to fill the form with fake values
       </small>
     </form>
   );

@@ -9,7 +9,7 @@ const Cart = () => {
   const totalPrice = useAppSelector(selectCartTotal);
 
   return (
-    <div className="my-6 flex flex-col items-center gap-4">
+    <div className="my-6 flex flex-col items-center gap-4 overflow-hidden">
       <BackBtn to={"/Pizzeria/menu"}>Back to menu</BackBtn>
       <h2 className="text-3xl">Cart</h2>
       {cartItems.length ? (
