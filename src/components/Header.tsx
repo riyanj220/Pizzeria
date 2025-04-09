@@ -37,7 +37,7 @@ const Header = () => {
             type="text"
             value={orderId}
             placeholder={isFocused ? "Enter order#" : "Find your order"}
-            className="input input-bordered text-neutral-900 w-full max-w-xs md:max-w-xs" 
+            className="input input-bordered text-white w-full max-w-xs md:max-w-xs" 
           />
         </form>
 

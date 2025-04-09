@@ -12,18 +12,18 @@ const MenuItem: FC<MenuItemProps> = ({ item, readonly }) => {
   const dispatch = useAppDispatch(); 
 
   const location = useLocation();
-  const imagePath = location.pathname.includes('/order/') ? `../public/images/pizzas/${item.image}`
+  const imagePath = location.pathname.includes('/order/') ? `/images/pizzas/${item.image}`
   : `./images/pizzas/${item.image}`;
 
   return (
 
     <div className="card px-4 card-side bg-base-300 shadow-xl">
-      <figure className="w-32 min-w-32 mask mask-squircle">
+      <figure className="w-20 min-w-32 mask mask-squircle">
 
         <img src={imagePath} alt="Pizza" />
         
       </figure>
-      <div className="card-body">
+      <div className="card-body p-2.5 sm:p-8">
         <h2 className="card-title">{item.title}</h2>
         <div>{item.ingredients.join(", ")}</div>
 
@@ -31,10 +31,10 @@ const MenuItem: FC<MenuItemProps> = ({ item, readonly }) => {
         <div className={`card-actions justify-between items-end`}>
           <b className="font-semibold">€{item.price}</b>
           {
-            quantity === 0 && !readonly ? <button className="btn btn-primary" onClick={() => {
+            quantity === 0 && !readonly ? <button className="btn btn-primary w-20 sm:w-32" onClick={() => {
               dispatch(addItem(item));
           }}>Add to Cart</button>:
-          <div className="flex gap-4 items-center">
+          <div className="flex gap-2 sm:gap-4 items-center">
             {!readonly && (
               <button className="btn btn-sm md:btn-md btn-primary btn-circle" onClick={() => {
                 dispatch(removeItem(item));
