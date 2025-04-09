@@ -9,7 +9,7 @@ const Cart = () => {
   const totalPrice = useAppSelector(selectCartTotal);
 
   return (
-    <div className="my-6 flex flex-col items-center gap-4 overflow-hidden">
+    <div className="my-6 flex flex-col items-center gap-4">
       <BackBtn to={"/Pizzeria/menu"}>Back to menu</BackBtn>
       <h2 className="text-3xl">Cart</h2>
       {cartItems.length ? (
@@ -27,7 +27,7 @@ const Cart = () => {
             <span>Total price</span>
             <span className="text-primary">€{totalPrice}</span>
           </div>
-          <Link to={"/Pizzeria/checkout"} className="btn btn-primary w-44">
+          <Link to={"/Pizzeria/checkout"} className="btn btn-primary w-30 sm:w-44">
             Checkout
           </Link>
         </>
